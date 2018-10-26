@@ -5,19 +5,15 @@
 
 void setup() 
 {
-  Serial7.begin(9600);
-  Serial.begin(9600); //Start serial communication at 9600
-  Serial7.begin(9600); //Start communication with Serial7
-  
+  Serial.begin(9600); //Start serial communication at 9600 for debug statements
 
-  //Turn on the backlight 100% so we can evaluate the contrast changes
-  Serial7.write(18);
-  Serial7.write('|'); //Put LCD into setting mode
+  Serial.println("Battery Indicator");
 
-  Serial7.write(128 + 29); //Set white/red backlight amount to 100%
-
-  //Serial7.write(128 + 0); //TODO Remove - used for defective prototype
-
+  Serial7.begin(9600); //Begin communication with Serial7
+  Serial7.write(254);
+  Serial7.write(1);
+  Serial7.write(254);
+  Serial7.write(128);
 }
 
 void loop() 
@@ -33,8 +29,8 @@ void loop()
   //I know I didn't have to type them all out!
   
   //Send the clear command to the display - this returns the cursor to the beginning of the display
-  Serial7.write('|'); //Setting character
-  Serial7.write('-'); //Clear display
+  Serial7.write(254); //Control character for next command
+  Serial7.write(1); //clear display
 
   Serial7.print("Pack:");
   Serial7.print(packVoltage, 1); //packVoltage from BMS, in V?
@@ -42,14 +38,16 @@ void loop()
   Serial7.print(" Cur:");
   Serial7.print(packCurrent, 2); //packCurrent from BMS, in A?
   Serial7.print("A");
-
+  /*
   for(int i = 0; i < NUM_CELLS; i++)
   {
     Serial7.print(i);
     Serial7.print(":");
     Serial7.print(cellVoltages[i+1], 1); //cellVoltage from BMS in V?  shows one decimal place
     Serial7.print("V ");
-  }
-  delay(1000);
-  
+  }*/
+
+  delay(2000);
+  Serial7.write(254);
+  Serial7.write(1);
 }
