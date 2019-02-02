@@ -4,7 +4,7 @@
 //To be copy pasted into BMS?
 //Call this in main loop
 //packVoltage, cellVoltages in volts, packCurrent in amps
-//cellVoltages must be length NUM_CELLS (24)
+//cellVoltages must be length NUM_CELLS (8)
 void voltagesToLCD(const float packVoltage, const float packCurrent, const float cellVoltages[])
 {
   
