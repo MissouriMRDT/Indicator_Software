@@ -20,7 +20,7 @@ void voltagesToLCD(const float packVoltage, const float packCurrent, const float
   if(LCD_Update == false)
   {
     time1 = millis();
-    LCD_Update = 1;
+    LCD_Update = true;
   }
 
   if(millis() >= (time1 + 2000))
